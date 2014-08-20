@@ -1,33 +1,43 @@
 <html>
 <head>
 	<?php
-	function exercise1() {
-		$i = 1;
-		do {
-			echo "<p>$i</p>";
-		} while($i++ < 10);
-	}
-	function exercise2() {
-		for($i = 1; $i <= 10; $i++) {
-			echo "<p>$i</p>";
+		class boardgame {
+			public $game_name = '';
+			public $min_players = 0;
+			public $max_players = 0;
+
+			public function __construct($name, $min_p, $max_p) {
+				$this->game_name = $name;
+				$this->min_players = $min_p;
+				$this->max_players = $max_p;
+			}
+			public function play() {
+				echo "You're playing $this->game_name.<br>";
+			}
+			public function players_supported() {
+				if($this->min_players == $this->max_players) {
+					echo "This game supports $this->min_players players.<br>";
+				}
+				else {
+					echo "This game supports $this->min_players to $this->max_players players.<br>";
+				}
+			}
 		}
-	}
-	function exercise3() {
-		$movies = array("The Princess Bride", "Scott Pilgrim vs. The World", "The Way Way Back");
-		foreach ($movies as $film) {
-			echo "<p>$film</p>";
-		}
-	}
-	function person_creator($first, $last, $phone) {
-		return array('first_name' => $first, 'last_name' => $last, 'phone_number' => $phone);
-	}
+
+		
 	?>
 </head>
 
 <body>
 
 <?php
-	var_dump(person_creator("Mason", "Twitty", "8248887"));
+	$carc = new boardgame('Carcassonne', 2, 5);
+	$carc->play();
+	$carc->players_supported();
+
+	$jaipur = new boardgame('Jaipur', 2, 2);
+	$jaipur->play();
+	$jaipur->players_supported();
 ?>
 	
 </body>
