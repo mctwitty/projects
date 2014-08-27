@@ -13,5 +13,35 @@
 
 Route::get('/', function()
 {
-	return View::make('scratchpad');
+	return View::make('landing');
+});
+Route::post('/login', function()
+{
+	$username = Input::get('username');
+	$password = Input::get('password');
+	
+	if($username && $password) {
+		return Redirect::to('/home');
+	} else {
+		#TODO flash error back
+		return 'Redirect::to('/');'
+	}
+});
+Route::post('/register', function()
+{
+	$full_name = Input::get('full_name');
+	$email = Input::get('email');
+	$password = Input::get('newpass');
+
+	if($full_name && $email && $password) {
+		#TODO if
+		return Redirect::to('/home');
+	} else {
+		#TODO flash error back
+		return Redirect::to('/');
+	}
+});
+Route::get('/home', function()
+{
+	return "hello";
 });
