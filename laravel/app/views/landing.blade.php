@@ -8,37 +8,42 @@
 			</div>
 			<div class="col-sm-3">
 				<div class="signin">
-					<form role="form" method="post" action="/login">
+					<form role="form" method="POST" action="/login">
 						<div class="form-group">
-					    	<label for="username">Username</label>
-					    	<input type="text" class="form-control" id="username" placeholder="Enter Username">
+					    	<label for="username">Email</label>
+					    	<input type="email" class="form-control" name="email" id="loginemail" placeholder="Enter Email">
 						</div>
 						<div class="form-group">
 					    	<label for="password">Password</label>
-					    	<input type="password" class="form-control" id="password" placeholder="Password">
+					    	<input type="password" class="form-control" name="password" id="loginpassword" placeholder="Password">
 						</div>
-						<button type="submit" class="btn btn-default" id="signin_button">Submit</button>
-						<div class="checkbox">
+						<div class="form-group">
 						    <label>
-								<input type="checkbox">Remember Me &middot; <a href="#">Forgot Password</a>
+								<input type="checkbox">Remember Me
 							</label>
+							 &middot;
+							 <a href="#">Forgot Password</a>
+							 <button type="submit" class="btn btn-primary pull-right">Sign In</button>
 						</div>
 					</form>
+						@if (Session::get('login'))
+						<div class="alert alert-warning" role="alert">{{{ Session::get('login') }}}</div>
+						@endif
 				</div>
 				<div class="signup">
 					<h2>New to gwaTwitter? Sign Up!</h2>
-					<form role="form" method="post" action="/register">
+					<form role="form" method="POST" action="/register">
 						<div class="form-group">
 							<label for="fullname">Full Name</label>
-							<input type="text" class="form-control" id="full_name" placeholder="Enter Full Name">
+							<input type="text" class="form-control" name="full_name" placeholder="Enter Full Name">
 						</div>
 						<div class="form-group">
 							<label for="email">Email address</label>
-							<input type="email" class="form-control" id="email" placeholder="Enter email">
+							<input type="email" class="form-control" name="email" placeholder="Enter email">
 						</div>
 						<div class="form-group">
 							<label for="newpass">Password</label>
-							<input type="password" class="form-control" id="newpass" placeholder="Password">
+							<input type="password" class="form-control" name="newpass" placeholder="Password">
 						</div>
 						<button type="submit" class="btn btn-default">Signup for gwaTwitter</button>
 					</form>

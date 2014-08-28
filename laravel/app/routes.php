@@ -11,37 +11,35 @@
 |
 */
 
-Route::get('/', function()
-{
+Route::get('/', function() {
 	return View::make('landing');
 });
-Route::post('/login', function()
-{
-	$username = Input::get('username');
+Route::post('/login', function() {
+	$email = Input::get('email');
 	$password = Input::get('password');
 	
-	if($username && $password) {
+	if($email && $password) {
+		#TODO redirect to home if email and password authenticates
 		return Redirect::to('/home');
 	} else {
 		#TODO flash error back
-		return 'Redirect::to('/');'
+		Session::flash('login', 'Username or password invalid.');
+		return Redirect::to('/');
 	}
 });
-Route::post('/register', function()
-{
+Route::post('/register', function() {
 	$full_name = Input::get('full_name');
 	$email = Input::get('email');
 	$password = Input::get('newpass');
 
 	if($full_name && $email && $password) {
-		#TODO if
+		#TODO if successfully inserted into database
 		return Redirect::to('/home');
 	} else {
 		#TODO flash error back
 		return Redirect::to('/');
 	}
 });
-Route::get('/home', function()
-{
+Route::get('/home', function() {
 	return "hello";
 });
