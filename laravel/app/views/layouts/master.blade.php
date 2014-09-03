@@ -5,6 +5,10 @@
 	<title>Geekwise Twitter</title>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<style>
+		.centered {
+			margin-left: auto;
+			margin-right: auto;
+		}
 		.wrapper {
 			margin: 0 auto;
 		}
@@ -24,6 +28,13 @@
 			float: right;
 			clear: all;
 		}
+		#profile_box {
+			background-color: #eee;
+		}
+		#tweetbox {
+			width: 100%;
+		}
+
 	</style>
 </head>
 <body>

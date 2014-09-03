@@ -12,7 +12,13 @@
 */
 
 Route::get('/', function() {
+	if(Auth::check()){
+		return Redirect::to('/home');
+	}
 	return View::make('landing');
+});
+Route::get('/home', function() {
+	return View::make('home');
 });
 Route::post('/login', function() {
 	$email = Input::get('email');
@@ -32,14 +38,27 @@ Route::post('/register', function() {
 	$email = Input::get('email');
 	$password = Input::get('newpass');
 
-	if($full_name && $email && $password) {
-		#TODO if successfully inserted into database
-		return Redirect::to('/home');
+	if(empty($email) || empty($full_name) || empty($password)) {
+	    Session::flash('register', 'email, fullname, or password invalid/missing');
+		return Redirect::to('/');	
+	}
+	$user = User::where('email', '=', $email)->first();
+	if ($user === null) {
+		# new user, register them
+		$user = new User;
+		$user->email = $email;
+		$user->full_name = $full_name;
+		$user->password = Hash::make($password);
+		$user->save();
+
+		#TODO Set isAuthenticated session
+		return Redirect::to('/home');	
 	} else {
-		#TODO flash error back
-		return Redirect::to('/');
+		# user with this email is already registered
+	    Session::flash('register', "$email is already registered");
+	    return Redirect::to('/');	
 	}
 });
-Route::get('/home', function() {
-	return "hello";
-});
+// Route::get('/home', function() {
+// 	return "hello";
+// });

@@ -46,6 +46,9 @@
 							<input type="password" class="form-control" name="newpass" placeholder="Password">
 						</div>
 						<button type="submit" class="btn btn-default">Signup for gwaTwitter</button>
+						@if (Session::get('register'))
+						<div class="alert alert-warning" role="alert">{{{ Session::get('register') }}}</div>
+						@endif
 					</form>
 				</div>
 			</div>
