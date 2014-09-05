@@ -17,15 +17,22 @@ Route::get('/', function() {
 	}
 	return View::make('landing');
 });
+
 Route::get('/home', function() {
-	return View::make('home');
+	if(Auth::check()) {
+		$full_name = Auth::user()->full_name;
+		$messages = Message::all();
+		//$messages = $messages->sortByDesc('created_at');
+		return View::make('home', array("first_name" => $full_name, "messages" => $messages));
+	}
+	return Redirect::to('/');
 });
+
 Route::post('/login', function() {
 	$email = Input::get('email');
 	$password = Input::get('password');
 	
-	if($email && $password) {
-		#TODO redirect to home if email and password authenticates
+	if(Auth::attempt(array('email' => $email, 'password' => $password))) {
 		return Redirect::to('/home');
 	} else {
 		#TODO flash error back
@@ -33,6 +40,7 @@ Route::post('/login', function() {
 		return Redirect::to('/');
 	}
 });
+
 Route::post('/register', function() {
 	$full_name = Input::get('full_name');
 	$email = Input::get('email');
@@ -43,7 +51,7 @@ Route::post('/register', function() {
 		return Redirect::to('/');	
 	}
 	$user = User::where('email', '=', $email)->first();
-	if ($user === null) {
+	if($user === null) {
 		# new user, register them
 		$user = new User;
 		$user->email = $email;
@@ -59,6 +67,21 @@ Route::post('/register', function() {
 	    return Redirect::to('/');	
 	}
 });
-// Route::get('/home', function() {
-// 	return "hello";
-// });
+
+Route::post('/message', function() {
+	if(Auth::check()) {
+		$body = Input::get('body');
+		$message = new Message;
+		$message->body = $body;
+		$message->user_id = Auth::id();
+		$message->save();
+	}
+	return Redirect::to('/');	
+});
+Route::post('/message/delete/{id}', function($id) {
+	if(Auth::check()) {
+		$message = Message::find($id);
+		$message->delete();
+	}
+	return Redirect::to('/');
+});

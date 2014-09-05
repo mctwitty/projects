@@ -3,8 +3,8 @@
 @section('content')
 	<div class="wrapper">
 		<div class="row">
-			<div class="col-sm-4">
-				<img src="https://s3-us-west-1.amazonaws.com/geekweise/message-cup.jpg">
+			<div class="col-sm-9">
+				<img src="https://s3-us-west-1.amazonaws.com/geekweise/message-cup.jpg" class="centered" style="display: block">
 			</div>
 			<div class="col-sm-3">
 				<div class="signin">
@@ -42,8 +42,8 @@
 							<input type="email" class="form-control" name="email" placeholder="Enter email">
 						</div>
 						<div class="form-group">
-							<label for="newpass">Password</label>
-							<input type="password" class="form-control" name="newpass" placeholder="Password">
+							<label for="password">Password</label>
+							<input type="password" class="form-control" name="password" placeholder="Password">
 						</div>
 						<button type="submit" class="btn btn-default">Signup for gwaTwitter</button>
 						@if (Session::get('register'))

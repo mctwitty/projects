@@ -11,6 +11,7 @@
 		}
 		.wrapper {
 			margin: 0 auto;
+			max-width: 1200px;
 		}
 		.signin {
 			background-color: #eee;
@@ -33,6 +34,10 @@
 		}
 		#tweetbox {
 			width: 100%;
+		}
+		.tweet {
+			border: 1px solid black;
+			background-color: gray;
 		}
 
 	</style>
